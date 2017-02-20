@@ -3,9 +3,6 @@
 namespace thepixelage\SharpSpring\Tests;
 
 use PHPUnit\Framework\TestCase;
-
-use thepixelage\SharpSpring\Account;
-use thepixelage\SharpSpring\Lead;
 use thepixelage\SharpSpring\SharpSpring;
 
 class SharpSpringTest extends TestCase
@@ -24,43 +21,5 @@ class SharpSpringTest extends TestCase
             SharpSpring::class,
             $this->ss
         );
-    }
-
-    public function testCanGetAccounts()
-    {
-        $accounts = $this->ss->getAccounts();
-
-        $this->assertInternalType(
-            'array',
-            $accounts
-        );
-
-        if (count($accounts) > 0) {
-
-            $this->assertInstanceOf(
-                Account::class,
-                $accounts[0]
-            );
-
-        }
-    }
-
-    public function testCanGetLeads()
-    {
-        $leads = $this->ss->getLeads();
-
-        $this->assertInternalType(
-            'array',
-            $leads
-        );
-
-        if (count($leads) > 0) {
-
-            $this->assertInstanceOf(
-                Lead::class,
-                $leads[0]
-            );
-
-        }
     }
 }

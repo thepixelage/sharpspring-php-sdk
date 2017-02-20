@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ronlim
- * Date: 20/2/17
- * Time: 9:12 PM
- */
 
-namespace thepixelage\SharpSpring;
-
+namespace thepixelage\SharpSpring\models;
 
 class Lead
 {

@@ -1,8 +1,9 @@
 <?php
-declare(strict_types=1);
+
 namespace thepixelage\SharpSpring;
 
 use Dotenv\Dotenv;
+use thepixelage\SharpSpring\helpers\Response;
 
 class SharpSpring
 {
@@ -25,56 +26,35 @@ class SharpSpring
         return sprintf('%s%s/?%s', $this->apiURLPrefix, $this->apiVersion, $query);
     }
 
-    public function getLeads()
-    {
-        $params = [
-            'where'  => [],
-            'limit'  => 500,
-        ];
-
-        $leads = [];
-
-        $response = $this->callMethod('getLeads', $params);
-        if (!$response->hasError()) {
-
-            foreach ($response->getResult()->lead as $lead) {
-
-                $leads[] = Factory::createLead($lead);
-
-            }
-
-        }
-
-        return $leads;
-    }
-
     public function getAccounts()
     {
-        $params = [
-            'where' => [],
-            'limit' => 500,
-        ];
+        return Accounts::getAccounts($this);
+    }
 
-        $accounts = [];
+    public function getCampaigns()
+    {
+        return Campaigns::getCampaigns($this);
+    }
 
-        $response = $this->callMethod('getAccounts', $params);
-        if (!$response->hasError()) {
+    public function getEvents()
+    {
+        return Events::getEvents($this);
+    }
 
-            foreach ($response->getResult()->account as $account) {
+    public function getFields()
+    {
+        return Fields::getFields($this);
+    }
 
-                $accounts[] = Factory::createAccount($account);
-
-            }
-
-        }
-
-        return $accounts;
+    public function getLeads()
+    {
+        return Leads::getLeads($this);
     }
 
     public function callMethod($method, $params)
     {
         $data = [
-            'id'     => session_id(),
+            'id'     => uniqid(),
             'method' => $method,
             'params' => $params,
         ];

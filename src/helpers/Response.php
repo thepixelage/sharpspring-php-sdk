@@ -1,7 +1,6 @@
 <?php
 
-namespace thepixelage\SharpSpring;
-
+namespace thepixelage\SharpSpring\helpers;
 
 class Response
 {
