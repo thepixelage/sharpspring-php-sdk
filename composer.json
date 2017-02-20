@@ -8,5 +8,8 @@
       "name": "Ron Lim",
       "email": "hello@thepixelage.com"
     }
-  ]
+  ],
+  "require": {
+    "php": "^7.0"
+  }
 }
