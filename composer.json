@@ -1,0 +1,12 @@
+{
+  "name": "thepixelage/sharpspring-php-sdk",
+  "description": "PHP SDK for SharpSpring API",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ron Lim",
+      "email": "hello@thepixelage.com"
+    }
+  ]
+}
