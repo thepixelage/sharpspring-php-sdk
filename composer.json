@@ -12,5 +12,18 @@
   ],
   "require": {
     "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "thepixelage\\SharpSpring\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "thepixelage\\SharpSpring\\Tests\\": "tests/"
+    }
   }
 }
