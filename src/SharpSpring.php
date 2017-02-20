@@ -25,30 +25,6 @@ class SharpSpring
         return sprintf('%s%s/?%s', $this->apiURLPrefix, $this->apiVersion, $query);
     }
 
-    public function doPostRequest($method, $params)
-    {
-        $data = [
-            'id'     => session_id(),
-            'method' => $method,
-            'params' => $params,
-        ];
-
-        $data = json_encode($data);
-        $ch = curl_init($this->getApiUrl());
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data)
-        ));
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return Response::createFromJson($result);
-    }
-
     public function getLeads()
     {
         $params = [
@@ -58,7 +34,7 @@ class SharpSpring
 
         $leads = [];
 
-        $response = $this->doPostRequest('getLeads', $params);
+        $response = $this->callMethod('getLeads', $params);
         if (!$response->hasError()) {
 
             foreach ($response->getResult()->lead as $lead) {
@@ -81,7 +57,7 @@ class SharpSpring
 
         $accounts = [];
 
-        $response = $this->doPostRequest('getAccounts', $params);
+        $response = $this->callMethod('getAccounts', $params);
         if (!$response->hasError()) {
 
             foreach ($response->getResult()->account as $account) {
@@ -93,5 +69,36 @@ class SharpSpring
         }
 
         return $accounts;
+    }
+
+    public function callMethod($method, $params)
+    {
+        $data = [
+            'id'     => session_id(),
+            'method' => $method,
+            'params' => $params,
+        ];
+
+        $result = $this->doPostRequest($data);
+
+        return Response::createFromJson($result);
+    }
+
+    public function doPostRequest($data)
+    {
+        $data = json_encode($data);
+        $ch = curl_init($this->getApiUrl());
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data)
+        ));
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 }
