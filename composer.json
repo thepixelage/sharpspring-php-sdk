@@ -1,6 +1,7 @@
 {
   "name": "thepixelage/sharpspring-php-sdk",
   "description": "PHP SDK for SharpSpring API",
+  "version": "dev-master",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
