@@ -49,6 +49,11 @@ class SharpSpring
         return Leads::getLeads($this);
     }
 
+    public function getLead($id)
+    {
+        return Leads::getLead($this, $id);
+    }
+
     public function callMethod($method, $params)
     {
         $data = [

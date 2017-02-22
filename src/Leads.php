@@ -6,6 +6,27 @@ use thepixelage\SharpSpring\helpers\Factory;
 
 class Leads
 {
+    public static function getLead(SharpSpring $ss, $id)
+    {
+        $params = [
+            'id' => $id
+        ];
+
+        $lead = null;
+
+        $response = $ss->callMethod('getLead', $params);
+        if (!$response->hasError()) {
+
+            $leads = $response->getResult()->lead;
+            if (count($leads) > 0) {
+                $lead = Factory::createLead($leads[0]);
+            }
+
+        }
+
+        return $lead;
+    }
+
     public static function getLeads(SharpSpring $ss)
     {
         $params = [

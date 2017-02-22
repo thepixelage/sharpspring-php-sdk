@@ -19,6 +19,16 @@ class LeadsTest extends TestCase
         $this->ss = new SharpSpring(getenv('SS_ACCOUNT_ID'), getenv('SS_SECRET_KEY'), getenv('SS_API_VERSION'));
     }
 
+    public function testCanGetLead()
+    {
+        $lead = $this->ss->getLead('109757632515');
+
+        $this->assertInstanceOf(
+            Lead::class,
+            $lead
+        );
+    }
+
     public function testCanGetLeads()
     {
         $leads = $this->ss->getLeads();
