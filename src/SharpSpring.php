@@ -2,7 +2,6 @@
 
 namespace thepixelage\SharpSpring;
 
-use Dotenv\Dotenv;
 use thepixelage\SharpSpring\helpers\Response;
 
 class SharpSpring
@@ -12,12 +11,11 @@ class SharpSpring
     private $apiVersion = 'v1';
     private $apiURLPrefix = 'https://api.sharpspring.com/pubapi/';
 
-    public function __construct($accountId = null, $secretKey = null)
+    public function __construct($accountId = null, $secretKey = null, $apiVersion = null)
     {
-        (new Dotenv(__DIR__ . '/../'))->load();
-        $this->accountId = $accountId ? $accountId : getenv('SS_ACCOUNT_ID');
-        $this->secretKey = $secretKey ? $secretKey : getenv('SS_SECRET_KEY');
-        $this->apiVersion = getenv('SS_API_VERSION') ? getenv('SS_API_VERSION') : $this->apiVersion;
+        $this->accountId = $accountId;
+        $this->secretKey = $secretKey;
+        $this->apiVersion = $apiVersion ? $apiVersion : $this->apiVersion;
     }
 
     public function getApiUrl()
