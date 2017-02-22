@@ -12,11 +12,11 @@ class SharpSpring
     private $apiVersion = 'v1';
     private $apiURLPrefix = 'https://api.sharpspring.com/pubapi/';
 
-    public function __construct()
+    public function __construct($accountId = null, $secretKey = null)
     {
         (new Dotenv(__DIR__ . '/../'))->load();
-        $this->accountId = getenv('SS_ACCOUNT_ID');
-        $this->secretKey = getenv('SS_SECRET_KEY');
+        $this->accountId = $accountId ? $accountId : getenv('SS_ACCOUNT_ID');
+        $this->secretKey = $secretKey ? $secretKey : getenv('SS_SECRET_KEY');
         $this->apiVersion = getenv('SS_API_VERSION') ? getenv('SS_API_VERSION') : $this->apiVersion;
     }
 
